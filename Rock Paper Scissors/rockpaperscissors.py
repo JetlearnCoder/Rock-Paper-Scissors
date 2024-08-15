@@ -27,23 +27,46 @@ def player_win():
 
 def tie():
     global computerscore,playerscore
-    """winnerlabel.config(text = "Tie!!")"""
-    print("tie")
-    
+    winnerlabel.config(text = "Tie!!")
+    player_score_label.config(text = "Player Score:" +str (playerscore))
+    computer_score_label.config(text = "Computer Score:" +str(computerscore))
+
 def game(playerinput):
     print(playerinput)
     computerinput = (random.choice(rps))
     print(computerinput)
+    player_chose_label.config(text = "Your selection:" +str (playerinput[0]))
+    computer_chose_label.config(text = "Computer selection:" +str (computerinput[0]))
+    
+    
     if playerinput == computerinput:
         tie()
-    
+    #if player has chosen rock
+    if playerinput[1] == 0:
+        if computerinput[1] == 1:
+            computer_win()
+        elif computerinput[1] == 2:
+            player_win()
+    #if player has chosen paper
+    if playerinput[1] == 1:
+        if computerinput[1] == 0:
+            player_win()
+        elif computerinput[1] ==2:
+            computer_win()
+    #if player has chosen scissors
+    if playerinput[1] == 2:
+        if computerinput[1] == 1:
+            player_win()
+        elif computerinput[1] == 0:
+            computer_win()
 
 
 gametitle = Label(window,text = "Rock Paper Scissors",
                     font = font.Font(size = 25)).place(x = 135,y = 25)
 
 winnerlabel = Label(window,text = "Lets Start!",
-                    font = font.Font(size = 15), fg = "green").place(x = 200, y = 75)
+                    font = font.Font(size = 15), fg = "green")
+winnerlabel.place(x=200,y = 75)
 
 input_frame = Frame(window)
 input_frame.place(x = 20, y = 110)
